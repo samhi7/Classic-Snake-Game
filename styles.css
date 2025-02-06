@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  #ab {
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: center; /* Centers items horizontally */
+    justify-content: center;
+    background: rgba(44, 157, 36, 0.6); /* Optional: Adds a semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+}
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #b3e16e;
+    overflow: hidden;
+  }
+  
+  #playButton {
+    padding: 17px 30px;
+    font-size:  35px;
+    background-color: #286a0e;
+    border: none;
+    color: rgb(235, 231, 227);
+    border-radius: 10px;
+    cursor: pointer;
+    animation: blink 1s infinite;
+    transition: transform 0.2s ease;
+  }
+  #playButton:hover {
+    animation: none; /* Stop scaling on hover */
+    transform: scale(1.1); /* Slightly enlarge when hovered */
+  }
+  #game {
+    display: block;
+    border: 3px solid rgb(83, 25, 25); /* Adds a white border */
+    
+  }
+  
+  #scoreBoard {
+    position: absolute;
+    top: 300px;
+    right: 200px;
+    font-size: 45px;
+    color: white;
+    font-family: Verdana, sans-serif;
+  }

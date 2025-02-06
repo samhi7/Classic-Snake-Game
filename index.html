@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body background="ai_bg.jpg">
+    
+    <div id="ab">
+        <img src="ai snake.webp" alt="Snake Game Logo" class="logo" width="300"><br>
+        <button id="playButton">Play</button>
+    </div>
+    <script>
+        const playButton = document.getElementById("playButton");
+
+        playButton.addEventListener("click", () => {
+            
+            window.location.href = "start.html"; 
+        });
+    </script>
+    </body>
+</html>
