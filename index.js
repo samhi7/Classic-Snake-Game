@@ -10,21 +10,21 @@ class SnakePart {
 }
 let tileSize =canvas.width /20;
 let tileCount = 20;
-let headX = 10;//head position
+let headX = 10;
 let headY = 10;
 let snakeParts = [];
-let tailLength = 1;//intial no of length of snake
-let appleX =5;//apple positon
+let tailLength = 1;
+let appleX =5;
 let appleY =5;
-let inputsXVelocity = 0;//initial
+let inputsXVelocity = 0;
 let inputsYVelocity = 0;
 let xVelocity = 0;
 let yVelocity = 0;
 let score = 0;
 let hiscore=localStorage.getItem("hiscore") ? parseInt(localStorage.getItem("hiscore")) : 0;
-//let gulpSound = new Audio("gulp.mp3");
+let gulpSound = new Audio("eat.mp3");
+let endgame = new Audio("out.wav");
 
-//game loop
 let gameRunning=true;
 function drawGame() {
   if (!gameRunning) return;
@@ -54,12 +54,6 @@ function updateScore() {
   document.getElementById("score").innerText = score;
   document.getElementById("hiscore").innerText = hiscore;
 }
-//function drawScore() {
-  //ctx.fillStyle = "white";
-  //ctx.font = "30px Verdana";
-  //ctx.fillText("Score " + score, 50 , 10);
-  //ctx.fillText("HiScore " + hiscore, 50 , 40);
-//}
 
 function clearScreen() {
  
@@ -73,9 +67,9 @@ function drawSnake() {
     ctx.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
   }
 
-  snakeParts.push(new SnakePart(headX, headY)); //put an item at the end of the list next to the head
+  snakeParts.push(new SnakePart(headX, headY)); 
   while (snakeParts.length > tailLength) {
-    snakeParts.shift(); // remove the furthet item from the snake parts if have more than our tail size.
+    snakeParts.shift(); 
   }
 
   ctx.fillStyle = "olive";
@@ -102,7 +96,7 @@ function checkAppleCollision() {
       hiscore = score;
       localStorage.setItem("hiscore", hiscore);
     }
-    //gulpSound.play();
+    gulpSound.play();
   }
 }
 
@@ -145,7 +139,7 @@ function keyDown(event) {
 
 
 function restartGame() {
-    // Reset snake position and velocity
+    
     headX = 10;
     headY = 10;
     inputsXVelocity = 0;
@@ -153,16 +147,15 @@ function restartGame() {
     xVelocity = 0;
     yVelocity = 0;
   
-    // Reset the snake and score
+    
     snakeParts = [];
     tailLength = 2;
     score = 0;
   
-    // Reset apple position
+    
     appleX = 5;
     appleY = 5;
   
-    // Restart the game loop
     gameRunning=true;
     drawGame();
   }
@@ -174,12 +167,13 @@ function restartGame() {
       return false;
     }
   
-    // Check for collisions with walls
+    
     if (headX < 0 || headX === tileCount || headY < 0 || headY === tileCount) {
       gameOver = true;
+      
     }
   
-    // Check for collisions with the snake's body
+   
     for (let i = 0; i < snakeParts.length; i++) {
       let part = snakeParts[i];
       if (part.x === headX && part.y === headY) {
@@ -189,6 +183,7 @@ function restartGame() {
     }
   
     if (gameOver) {
+      endgame.play();
       gameRunning=false;
       ctx.fillStyle = "white";
       ctx.font = "50px Verdana";
@@ -196,7 +191,7 @@ function restartGame() {
       ctx.font = "20px Verdana";
       ctx.fillText("Press Any Key to Restart.", canvas.width / 4, canvas.height / 1.75);
   
-      // Add event listener for restarting the game
+      
       document.body.addEventListener("keydown", restartOnKeyPress);
     }
   
@@ -204,7 +199,7 @@ function restartGame() {
   }
   
   function restartOnKeyPress() {
-    document.body.removeEventListener("keydown", restartOnKeyPress); // Prevent multiple triggers
+    document.body.removeEventListener("keydown", restartOnKeyPress); 
     restartGame();
   }
 
